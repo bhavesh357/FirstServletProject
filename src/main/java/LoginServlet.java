@@ -29,7 +29,7 @@ public class LoginServlet  extends HttpServlet {
         }else{
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.html");
             PrintWriter writer = response.getWriter();
-            writer.println("<font color red>Either username or password is wrong</font>");
+            writer.println("<font color=red>Either username or password is wrong</font>");
             rd.include(request,response);
         }
     }
