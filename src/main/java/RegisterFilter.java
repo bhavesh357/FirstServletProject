@@ -33,25 +33,30 @@ public class RegisterFilter implements Filter {
                         try {
                             if(UserDAO.getUser(username)==null){
                                 writer.println("<font color=green>Successfully Registered</font>");
+                                filterChain.doFilter(request,response);
                                 }else{
                                 writer.println("<font color=red>User Already Exist</font>");
+                                rd.include(request,response);
                             }
                         } catch (SQLException throwables) {
                             throwables.printStackTrace();
                         }
                     } else {
                         writer.println("<font color=red>Password is not valid</font>");
+                        rd.include(request,response);
                     }
                 } else {
                     writer.println("<font color=red>Username is not valid</font>");
+                    rd.include(request,response);
                 }
             } else {
                 writer.println("<font color=red>password dont match</font>");
+                rd.include(request,response);
             }
         }else {
             writer.println("<font color=red>Please fill all fields</font>");
+            rd.include(request,response);
         }
-        rd.include(request,response);
     }
 
     @Override

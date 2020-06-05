@@ -15,8 +15,6 @@ public class RegisterServlet extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         RequestDispatcher rd = getServletContext().getRequestDispatcher("/register.jsp");
-        PrintWriter writer = response.getWriter();
-        writer.println("<font color=green>Successfully Registered</font>");
         try {
             UserDAO.insertUser(username, password);
         } catch (SQLException throwables) {
