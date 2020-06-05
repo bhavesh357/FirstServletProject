@@ -5,7 +5,7 @@
 </head>
 <body>
 <form action="RegisterServlet" method="post">
-    Username:  <input type="text" name="user">
+    Username:  <input type="text" name="username">
     <br>
     Password: <input type="password" name="password">
     <br>

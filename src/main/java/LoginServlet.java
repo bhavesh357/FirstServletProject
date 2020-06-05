@@ -7,23 +7,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 
 @WebServlet(
         description = "login Servlet testing",
-        urlPatterns= {"/LoginServlet"},
-        initParams={
-            @WebInitParam(name = "user", value = "Bhavesh"),
-            @WebInitParam(name = "password", value = "leo")
-    }
+        urlPatterns= {"/LoginServlet"}
 )
 public class LoginServlet  extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String name = request.getParameter("user");
         String pwd = request.getParameter("password");
-
-        String user = getServletConfig().getInitParameter("user");
-        String password = getServletConfig().getInitParameter("password");
-        if (user.equals(name) && password.equals(pwd)){
+        User user = null;
+        try {
+            user = UserDAO.getUser(name,pwd);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        if (user!=null){
             request.setAttribute("user",user);
             request.getRequestDispatcher("welcome.jsp").forward(request,response);
         }else{
