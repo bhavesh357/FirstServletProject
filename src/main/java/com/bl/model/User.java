@@ -1,3 +1,5 @@
+package com.bl.model;
+
 public class User {
     private String name;
     private String password;

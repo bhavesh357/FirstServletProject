@@ -1,13 +1,16 @@
+package com.bl.filters;
+
+import com.bl.model.UserDAO;
+
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 
-@WebFilter("/RegisterServlet")
+@WebFilter("/com.bl.servlets.RegisterServlet")
 public class RegisterFilter implements Filter {
     private String namePattern = "^[A-Z][a-z]{2,}$";
     private String passwordPattern = "^(?=.*[A-Z])(?=.*[0-9])(?=.*[A-Za-z0-9@#!$%^&*()_-]{8,})[A-Za-z0-9]+?[@#!$%^&*()_-][A-Za-z0-9]{1,}?$";
@@ -35,7 +38,7 @@ public class RegisterFilter implements Filter {
                                 writer.println("<font color=green>Successfully Registered</font>");
                                 filterChain.doFilter(request,response);
                                 }else{
-                                writer.println("<font color=red>User Already Exist</font>");
+                                writer.println("<font color=red>com.bl.model.User Already Exist</font>");
                                 rd.include(request,response);
                             }
                         } catch (SQLException throwables) {

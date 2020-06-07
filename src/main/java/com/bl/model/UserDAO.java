@@ -1,3 +1,7 @@
+package com.bl.model;
+
+import com.bl.DatabaseConnector;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,7 +13,7 @@ public class UserDAO {
     private static PreparedStatement ps;
     public static User getUser(String name, String pwd) throws SQLException {
         User user = null;
-        con=DatabaseConnector.getConnection();
+        con= DatabaseConnector.getConnection();
         ps=con.prepareStatement("select * from mydatabase.users where name=? and password=?");
         ps.setString(1,name);
         ps.setString(2,pwd);
@@ -23,7 +27,7 @@ public class UserDAO {
     }
 
     public static int insertUser(String username, String password) throws SQLException {
-        con=DatabaseConnector.getConnection();
+        con= DatabaseConnector.getConnection();
         ps=con.prepareStatement("insert into mydatabase.users values(?,?)");
         ps.setString(1,username);
         ps.setString(2,password);
@@ -33,7 +37,7 @@ public class UserDAO {
 
     public static User getUser(String username) throws SQLException {
         User user = null;
-        con=DatabaseConnector.getConnection();
+        con= DatabaseConnector.getConnection();
         ps=con.prepareStatement("select * from mydatabase.users where name=?");
         ps.setString(1,username);
         ResultSet resultSet = ps.executeQuery();

@@ -1,6 +1,10 @@
+package com.bl.servlets;
+
+import com.bl.model.User;
+import com.bl.model.UserDAO;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -11,7 +15,7 @@ import java.sql.SQLException;
 
 @WebServlet(
         description = "login Servlet testing",
-        urlPatterns= {"/LoginServlet"}
+        urlPatterns= {"/com.bl.servlets.LoginServlet"}
 )
 public class LoginServlet  extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
