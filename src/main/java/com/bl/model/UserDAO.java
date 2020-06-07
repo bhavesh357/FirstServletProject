@@ -11,11 +11,11 @@ public class UserDAO {
 
     private static Connection con;
     private static PreparedStatement ps;
-    public static User getUser(String name, String pwd) throws SQLException {
+    public static User getUser(String emailid, String pwd) throws SQLException {
         User user = null;
         con= DatabaseConnector.getConnection();
-        ps=con.prepareStatement("select * from mydatabase.users where name=? and password=?");
-        ps.setString(1,name);
+        ps=con.prepareStatement("select * from mydatabase.newusers where emailId=? and password=?");
+        ps.setString(1,emailid);
         ps.setString(2,pwd);
         ResultSet resultSet = ps.executeQuery();
         while (resultSet.next()){
@@ -26,20 +26,21 @@ public class UserDAO {
         return user;
     }
 
-    public static int insertUser(String username, String password) throws SQLException {
+    public static int insertUser(String username,String email,String password) throws SQLException {
         con= DatabaseConnector.getConnection();
-        ps=con.prepareStatement("insert into mydatabase.users values(?,?)");
+        ps=con.prepareStatement("insert into mydatabase.newusers(name,emailId,password) values(?,?,?)");
         ps.setString(1,username);
-        ps.setString(2,password);
+        ps.setString(2,email);
+        ps.setString(3,password);
         int status = ps.executeUpdate();
         return status;
     }
 
-    public static User getUser(String username) throws SQLException {
+    public static User getUser(String emailId) throws SQLException {
         User user = null;
         con= DatabaseConnector.getConnection();
-        ps=con.prepareStatement("select * from mydatabase.users where name=?");
-        ps.setString(1,username);
+        ps=con.prepareStatement("select * from mydatabase.newusers where emailId=?");
+        ps.setString(1,emailId);
         ResultSet resultSet = ps.executeQuery();
         while (resultSet.next()){
             user=new User();

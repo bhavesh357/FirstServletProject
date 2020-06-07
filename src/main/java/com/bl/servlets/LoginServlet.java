@@ -15,15 +15,15 @@ import java.sql.SQLException;
 
 @WebServlet(
         description = "login Servlet testing",
-        urlPatterns= {"/com.bl.servlets.LoginServlet"}
+        urlPatterns= {"/LoginServlet"}
 )
 public class LoginServlet  extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String name = request.getParameter("user");
+        String email = request.getParameter("email");
         String pwd = request.getParameter("password");
         User user = null;
         try {
-            user = UserDAO.getUser(name,pwd);
+            user = UserDAO.getUser(email,pwd);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
