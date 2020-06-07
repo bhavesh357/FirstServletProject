@@ -2,20 +2,34 @@
 <head>
     <meta charset="US-ASCII">
     <title>Registration Page</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-<form action="RegisterServlet" method="post">
-    Username:  <input type="text" name="username">
+<div class="form-body form-body-register">
+    <h1>Register Form</h1>
     <br>
-    Email Id:  <input type="text" name="email">
-    <br>
-    Password: <input type="password" name="password">
-    <br>
-    Re-Type Password:  <input type="password" name="passwordRepeat">
-    <br>
-
-    <input type="submit" value="Register">
-    <a href="login.html">Login</a>
-</form>
+    <form action="RegisterServlet" method="post">
+        <div class="form-input">
+            <input type="text" name="username" placeholder="Username" class="form-input-text">
+        </div>
+        <br>
+        <div class="form-input">
+            <input type="text" name="email" placeholder="Email ID" class="form-input-text">
+        </div>
+        <br>
+        <div class="form-input">
+            <input type="password" name="password" placeholder="Password" class="form-input-text">
+        </div>
+        <br>
+        <div class="form-input">
+            <input type="password" name="passwordRepeat" placeholder="Re-Enter Password" class="form-input-text">
+        </div>
+        <br>
+        <br>
+        <button type="submit" value="Register" class="form-primary">Register</button>
+    </form>
+    <h4>Already Registered?</h4>
+    <a href="login.html"><button>Login</button></a>
+</div>
 </body>
 </html>

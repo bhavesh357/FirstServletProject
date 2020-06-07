@@ -1,0 +1,49 @@
+body{
+    background: #393e46;
+}
+
+button{
+    height: 50px;
+    width: 40%;
+    border-radius: 25px;
+    font-size: 1em;
+    background: #393e46;
+    color: #32e0c4;
+    font-weight: 600;
+    outline: -webkit-focus-ring-color auto 0px;
+}
+
+.form-input-text{
+    height: 50px;
+    width: 80%;
+    font-size: 1em;
+    text-align: left;
+    padding-left: 10px;
+    border-radius: 15px;
+    color: #393e46;
+}
+.form-body{
+    width: 20%;
+    border-radius: 25px;
+    position: relative;
+    left: 40%;
+    color: #393e46;
+    text-align: center;
+    padding-top: 1%;
+    background: #32e0c4;
+}
+
+.form-body-login{
+    height: 70%;
+    margin-top: 7%;
+}
+
+a{
+    color: #32e0c4;
+    text-decoration: none;
+}
+
+.form-body-register{
+    height: 90%;
+    margin-top: 2.5%;
+}

@@ -2,15 +2,26 @@
 <head>
     <meta charset="US-ASCII">
     <title>Login Page</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
+<div class="form-body form-body-login">
+    <h1>Login Form</h1>
+    <br>
     <form action="LoginServlet" method="post">
-    Email ID:  <input type="text" name="email">
-    <br>
-    Password: <input type="password" name="password">
-    <br>
-        <input type="submit" value="Login">
-        <a href="register.jsp">Register</a>
+        <div class="form-input">
+            <input type="text" name="email" placeholder="Email ID" class="form-input-text">
+        </div>
+        <br>
+        <div class="form-input">
+            <input type="password" name="password" placeholder="Password" class="form-input-text">
+        </div>
+        <br>
+        <br>
+        <button type="submit" value="Login" class="form-primary">Login</button>
     </form>
+    <h4>Not a User?</h4>
+    <a href="register.jsp"><button>Register</button></a>
+</div>
 </body>
 </html>
