@@ -7,7 +7,14 @@
 <body>
 <div class="form-body form-body-register">
     <h1>Register Form</h1>
-    <br>
+    <%
+        String msg=(String)request.getAttribute("message");
+        if(msg==null)
+        {
+            msg="";
+        }
+    %>
+    <%=msg%>
     <form action="RegisterServlet" method="post">
         <div class="form-input">
             <input type="text" name="username" placeholder="Username" class="form-input-text">
@@ -29,7 +36,7 @@
         <button type="submit" value="Register" class="form-primary">Register</button>
     </form>
     <h4>Already Registered?</h4>
-    <a href="login.html"><button>Login</button></a>
+    <a href="login.jsp"><button>Login</button></a>
 </div>
 </body>
 </html>

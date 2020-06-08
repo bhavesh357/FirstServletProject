@@ -5,6 +5,6 @@
 </head>
 <body>
 <h1>Login successful!!</h1>
-<a href="login.html">Login Page</a>
+<a href="login.jsp">Login Page</a>
 </body>
 </html>

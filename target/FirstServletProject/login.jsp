@@ -7,7 +7,14 @@
 <body>
 <div class="form-body form-body-login">
     <h1>Login Form</h1>
-    <br>
+    <%
+    String msg=(String)request.getAttribute("message");
+    if(msg==null)
+    {
+        msg="";
+    }
+    %>
+    <%=msg%>
     <form action="LoginServlet" method="post">
         <div class="form-input">
             <input type="text" name="email" placeholder="Email ID" class="form-input-text">

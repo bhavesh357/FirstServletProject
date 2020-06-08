@@ -7,7 +7,6 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 
 @WebFilter("/RegisterServlet")
@@ -20,7 +19,9 @@ public class RegisterFilter implements Filter {
     private String password;
     private String passwordRepeat;
     private RequestDispatcher rd;
-    private PrintWriter writer;
+    HttpServletRequest request;
+    HttpServletResponse response;
+    String message;
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
@@ -28,18 +29,21 @@ public class RegisterFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        HttpServletRequest request = (HttpServletRequest) servletRequest;
-        HttpServletResponse response = (HttpServletResponse) servletResponse;
+        request = (HttpServletRequest) servletRequest;
+        response = (HttpServletResponse) servletResponse;
         username = request.getParameter("username");
         email = request.getParameter("email");
         password = request.getParameter("password");
         passwordRepeat = request.getParameter("passwordRepeat");
         rd = request.getRequestDispatcher("/register.jsp");
-        writer = response.getWriter();
         try {
-            if(isFieldNotEmpty() && isPasswordSame() && doesNameMatch() && doesEmailMatch() && doesPasswordMatch() && ifUserNotExist()){
+            if(isFieldNotEmpty() && isPasswordSame() &&
+                    doesNameMatch() && doesEmailMatch() &&
+                        doesPasswordMatch() && ifUserNotExist()){
+                request.setAttribute("message", message);
                 filterChain.doFilter(request,response);
             }else{
+                request.setAttribute("message", message);
                 rd.include(request,response);
             }
         } catch (SQLException throwables) {
@@ -49,17 +53,17 @@ public class RegisterFilter implements Filter {
 
     private boolean ifUserNotExist() throws SQLException {
         if(UserDAO.getUser(email)==null){
-            writer.println("<font color=green>Successfully Registered</font>");
+            message ="<h4 style=\"color:green\">Successfully Registered</h4>";
             return true;
         }else{
-            writer.println("<font color=red>User Already Exist</font>");
+            message ="<h4 style=\"color:red\">User Already Exist</h4>";
             return false;
         }
     }
 
     private boolean doesPasswordMatch() {
         if (!password.matches(passwordPattern)) {
-            writer.println("<font color=red>Password is not valid</font>");
+            message ="<h4 style=\"color:red\">Password is not valid</h4>";
             return false;
         }
         return true;
@@ -67,14 +71,15 @@ public class RegisterFilter implements Filter {
 
     private boolean doesEmailMatch() {
         if (!email.matches(emailPattern)){
-            writer.println("<font color=red>Email is not valid</font>");
+            message ="<h4 style=\"color:red\">Email is not valid</h4>";
+            return false;
         }
         return true;
     }
 
     private boolean doesNameMatch() {
         if (!username.matches(namePattern)) {
-            writer.println("<font color=red>Username is not valid</font>");
+            message ="<h4 style=\"color:red\">Username is not valid</h4>";
             return false;
         }
         return true;
@@ -82,7 +87,7 @@ public class RegisterFilter implements Filter {
 
     private boolean isPasswordSame() {
         if (!password.equals(passwordRepeat)) {
-            writer.println("<font color=red>password dont match</font>");
+            message ="<h4 style=\"color:red\">password dont match</h4>";
             return false;
         }
         return true;
@@ -90,7 +95,7 @@ public class RegisterFilter implements Filter {
 
     private boolean isFieldNotEmpty() {
         if(username.isEmpty() || email.isEmpty() || password.isEmpty() || passwordRepeat.isEmpty()) {
-            writer.println("<font color=red>Please fill all fields</font>");
+            message="<h4 style=\"color:red\">Please fill all fields</h4>";
             return false;
         }
         return true;

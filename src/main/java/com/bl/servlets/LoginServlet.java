@@ -18,6 +18,8 @@ import java.sql.SQLException;
         urlPatterns= {"/LoginServlet"}
 )
 public class LoginServlet  extends HttpServlet {
+    private String message;
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String email = request.getParameter("email");
         String pwd = request.getParameter("password");
@@ -31,9 +33,9 @@ public class LoginServlet  extends HttpServlet {
             request.setAttribute("user",user);
             request.getRequestDispatcher("welcome.jsp").forward(request,response);
         }else{
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.html");
-            PrintWriter writer = response.getWriter();
-            writer.println("<font color=red>Either username or password is wrong</font>");
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.jsp");
+            message ="<h4 style=\"color:red\">Either username or password is wrong</h4>";
+            request.setAttribute("message", message);
             rd.include(request,response);
         }
     }
